@@ -453,10 +453,21 @@ console.log(sortPresidentsByBirthYear(presidents));
 
 
 // Bonus: Iteration 5 | Age at Inauguration - `map()`
-function getAgeAtInauguration(presidentsArr) {
+/*function getAgeAtInauguration(presidentsArr) {
   const inludingAgeAtInauguration = presidentsArr.map((presidentObj) => (presidentObj.ageAtInauguration = presidentObj.tookOffice - presidentObj.birthYear));
   return inludingAgeAtInauguration;
+}*/ 
+
+function getAgeAtInauguration(presidentsArr) {
+  return presidentsArr.map((presidentObj) => {
+    return {
+      ...presidentObj, // spread operator to copy existing properties
+      ageAtInauguration: presidentObj.tookOffice - presidentObj.birthYear // Add new property
+    };
+  });
 }
+
+console.log(getAgeAtInauguration(presidents));
 console.log(getAgeAtInauguration(presidents));
 
 
@@ -475,9 +486,10 @@ function countRepublicanPresidents(presidentsArr) {
   const numberOfRepublicanPresidents = presidentsArr
   
   .reduce(function(acc, presidentObj) {
-    if(presidentObj.party === "Republicans"){
+    if(presidentObj.party === "Republican"){
       return acc + 1;
     }
+    return acc;
   }
   , 0);
   return numberOfRepublicanPresidents;
